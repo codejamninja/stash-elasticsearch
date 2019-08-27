@@ -119,6 +119,9 @@ func NewCmdRestore() *cobra.Command {
 				"--direction=load",
 				fmt.Sprintf(`--input=%v`, ESDataDir),
 				fmt.Sprintf(`--output=%v`, esURL),
+				// ignore searchguard indices. ref: https://forum.search-guard.com/t/is-admin-cant-update-mapping-settings-or-aliases-of-searchguard-index-since-25-0-release/1616.
+				// regular exp: Allow everything except searchguard. https://stackoverflow.com/a/43237018/4628962
+				"--match=^(?!searchguard$).*$",
 				tlsArgs,
 				esArgs,
 			)
