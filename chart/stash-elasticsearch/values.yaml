@@ -3,9 +3,9 @@
 # Declare variables to be passed into your templates.
 
 docker:
-  registry: stashed
+  registry: codejamninja
   image: stash-elasticsearch
-  tag: 6.3
+  tag: 7e94690-dirty_linux_amd64
 
 # optional argument to send multielasticdump
 backup:
