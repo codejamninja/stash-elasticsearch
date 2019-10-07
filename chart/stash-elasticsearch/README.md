@@ -7,12 +7,12 @@
 ```console
 helm repo add appscode https://charts.appscode.com/stable/
 helm repo update
-helm install appscode/stash-elasticsearch --name=stash-elasticsearch-6.3 --version=6.3
+helm install appscode/stash-elasticsearch --name=stash-elasticsearch-7.3.2 --version=7.3.2
 ```
 
 ## Introduction
 
-This chart installs necessary `Function` and `Task` definition to backup or restore Elasticsearch database 6.3 using Stash.
+This chart installs necessary `Function` and `Task` definition to backup or restore Elasticsearch database 7.3.2 using Stash.
 
 ## Prerequisites
 
@@ -32,20 +32,20 @@ helm repo add appscode https://charts.appscode.com/stable/
 helm repo update
 ```
 
-- Install the chart with the release name `stash-elasticsearch-6.3` run the following command,
+- Install the chart with the release name `stash-elasticsearch-7.3.2` run the following command,
 
 ```console
-helm install appscode/stash-elasticsearch --name=stash-elasticsearch-6.3 --version=6.3
+helm install appscode/stash-elasticsearch --name=stash-elasticsearch-7.3.2 --version=7.3.2
 ```
 
-The above commands installs `Functions` and `Task` crds that are necessary to backup Elasticsearch database 6.3 using Stash.
+The above commands installs `Functions` and `Task` crds that are necessary to backup Elasticsearch database 7.3.2 using Stash.
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `stash-elasticsearch-6.3` run the following command,
+To uninstall/delete the `stash-elasticsearch-7.3.2` run the following command,
 
 ```console
-helm delete stash-elasticsearch-6.3
+helm delete stash-elasticsearch-7.3.2
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -54,33 +54,18 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The following table lists the configurable parameters of the `stash-elasticsearch` chart and their default values.
 
-| Parameter                   | Description                                                                                                                         |        Default        |
-| --------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
-| `docker.registry`           | Docker registry used to pull respective images                                                                                      | `stashed`             |
-| `docker.image`              | Docker image used to backup/restore PosegreSQL database                                                                             | `stash-elasticsearch` |
-| `docker.tag`                | Tag of the image that is used to backup/restore Elasticsearch database. This is usually same as the database version it can backup. | `6.3`                 |
-| `backup.esArgs`             | Optional arguments to pass to `multielasticdump` command  during bakcup process                                                     |                       |
-| `restore.esArgs`            | Optional arguments to pass to `multielasticdump` command during restore process                                                     |                       |
-| `metrics.enabled`           | Specifies whether to send Prometheus metrics                                                                                        | `true`                |
-| `metrics.labels`            | Optional comma separated labels to add to the Prometheus metrics                                                                    |                       |
-| `persistence.enabled`       | Enable persistence using PVC. If `false`, a `empty directory` volume will be used  for elastic backup directory.                    | `false`               |
-| `persistence.existingClaim` | Provide an existing `PersistentVolumeClaim`, the value is evaluated as a template.                                                  | `nil`                 |
-| `persistence.namespace`     | The namespace where `pvc` is created. This namespace needs to be same as `backupsession` or  `restoresession` namespace.            | `default`             |
-| `persistence.storageClass`  | PVC Storage Class for Elasticsearch volume                                                                                          | `nil`                 |
-| `persistence.accessModes`   | PVC Access Mode for Elasticsearch volume                                                                                            | `[ReadWriteOnce]`     |
-| `persistence.size`          | PVC Storage Request for Elasticsearch volume                                                                                        | `8Gi`                 |
-| `persistence.annotations`   | Annotations for the PVC                                                                                                             | `{}`                  |
+| Parameter         | Description                                                                                                                         | Default               |
+| ----------------- | :---------------------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| `docker.registry` | Docker registry used to pull respective images                                                                                      | `stashed`             |
+| `docker.image`    | Docker image used to backup/restore PosegreSQL database                                                                             | `stash-elasticsearch` |
+| `docker.tag`      | Tag of the image that is used to backup/restore Elasticsearch database. This is usually same as the database version it can backup. | `7.3.2`               |
+| `backup.esArgs`   | Optional arguments to pass to `multielasticdump` command  during backup process                                                     |                       |
+| `restore.esArgs`  | Optional arguments to pass to `multielasticdump` command during restore process                                                     |                       |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`.
 
 For example:
 
 ```console
-helm install --name stash-elasticsearch-6.3 --set metrics.enabled=false appscode/stash-elasticsearch
-```
-
-**Tips:** Use escape character (`\`) while providing multiple comma-separated labels for `metrics.labels`.
-
-```console
- helm install chart/stash-elasticsearch --set metrics.labels="k1=v1\,k2=v2"
+helm install --name stash-elasticsearch-7.3.2 --set docker.registry=my-registry appscode/stash-elasticsearch
 ```

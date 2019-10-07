@@ -59,8 +59,8 @@ BIN_PLATFORMS    := $(DOCKER_PLATFORMS)
 OS   := $(if $(GOOS),$(GOOS),$(shell go env GOOS))
 ARCH := $(if $(GOARCH),$(GOARCH),$(shell go env GOARCH))
 
-BASEIMAGE_PROD   ?= node:8.14-alpine
-BASEIMAGE_DBG    ?= node:8.14-alpine
+BASEIMAGE_PROD   ?= node:10-alpine
+BASEIMAGE_DBG    ?= node:10-alpine
 
 IMAGE            := $(REGISTRY)/$(BIN)
 VERSION_PROD     := $(VERSION)
@@ -118,12 +118,12 @@ all-container: $(addprefix container-, $(subst /,_, $(DOCKER_PLATFORMS)))
 all-push: $(addprefix push-, $(subst /,_, $(DOCKER_PLATFORMS)))
 
 version:
-	@echo version=$(VERSION)
-	@echo version_strategy=$(version_strategy)
-	@echo git_tag=$(git_tag)
-	@echo git_branch=$(git_branch)
-	@echo commit_hash=$(commit_hash)
-	@echo commit_timestamp=$(commit_timestamp)
+	@echo ::set-output name=version::$(VERSION)
+	@echo ::set-output name=version_strategy::$(version_strategy)
+	@echo ::set-output name=git_tag::$(git_tag)
+	@echo ::set-output name=git_branch::$(git_branch)
+	@echo ::set-output name=commit_hash::$(commit_hash)
+	@echo ::set-output name=commit_timestamp::$(commit_timestamp)
 
 gen:
 	@true

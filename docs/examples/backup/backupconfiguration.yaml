@@ -6,7 +6,7 @@ metadata:
 spec:
   schedule: "*/5 * * * *"
   task:
-    name: elasticsearch-backup-6.5
+    name: elasticsearch-backup-7.3.2
   repository:
     name: gcs-repo
   target:
@@ -14,6 +14,16 @@ spec:
       apiVersion: appcatalog.appscode.com/v1alpha1
       kind: AppBinding
       name: sample-elasticsearch
+  interimVolumeTemplate:
+    metadata:
+      name: stash-tmp-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 1Gi
   retentionPolicy:
+    name: keep-last-5
     keepLast: 5
     prune: true
