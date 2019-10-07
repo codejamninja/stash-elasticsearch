@@ -5,7 +5,7 @@
 docker:
   registry: codejamninja
   image: stash-elasticsearch
-  tag: 7e94690-dirty_linux_amd64
+  tag: 7.3.2-3-g408cf74_linux_amd64
 
 # optional argument to send multielasticdump
 backup:
